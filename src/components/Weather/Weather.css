@@ -1,9 +1,10 @@
 .weather.card {
-    margin-top:4vh;
+    margin-top: 4vh;
 }
 
 .weather.card .card-content {
     background: #0b0829;
+    padding-bottom: 30px;
 }
 
 .weather.card .card-action {
@@ -11,8 +12,26 @@
 }
 
 .weather .temperature {
-    margin-left:4vh;
-    font-size:120px;
+    margin-left: 4vh;
+    font-size: 120px;
     font-family: 'Roboto', sans-serif;
     text-shadow: -1px 0 #61dafb, 0 1px #61dafb, 1px 0 #61dafb, 0 -1px #61dafb;
+}
+
+.weather-details {
+    margin-top: 20px;
+}
+
+.condition {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.minmax-temp {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.wind {
+    margin-bottom: 10px;
 }

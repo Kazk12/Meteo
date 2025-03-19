@@ -1,3 +1,24 @@
 .weather.card {
-    margin-top:4vh;
-}
+    margin-top: 4vh;
+  }
+  
+  .search-area {
+    background: #0b0829 !important;
+    border-bottom: 1px solid rgba(97, 218, 251, 0.2);
+    padding-bottom: 0 !important;
+  }
+  
+  /* Pour les animations de chargement quand on change de ville */
+  @keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+  }
+  
+  .loading {
+    animation: pulse 1.5s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
