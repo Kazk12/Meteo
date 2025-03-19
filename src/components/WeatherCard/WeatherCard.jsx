@@ -3,6 +3,7 @@ import './WeatherCard.css'
 import Weather from '../Weather/Weather'
 import Days from '../Days/Days'
 import CitySearch from '../CitySearch/CitySearch'
+import TemperatureChart from '../TemperatureChart/TemperatureChart'
 import { getWeatherForecast } from '../../services/weatherService';
 
 function WeatherCard() {
@@ -45,19 +46,31 @@ function WeatherCard() {
       </div>
 
       {loading ? (
-        <div className="card-content white-text">Chargement...</div>
+        <div className="card-content white-text loading">Chargement...</div>
       ) : error ? (
-        <div className="card-content white-text">Erreur: {error.message}</div>
+        <div className="card-content white-text error">Erreur: {error.message}</div>
       ) : !weather ? (
         <div className="card-content white-text">Aucune donnée disponible</div>
       ) : (
         <>
-          <Weather 
-            name={weather.location.name} 
-            weather={weather} 
-            selectedDay={weather.forecast.forecastday[selectedDayIndex]}
-            isToday={selectedDayIndex === 0} 
-          />
+          <div className="card-content white-text weather-content">
+            <div className="row">
+              <div className="col s12 m6 weather-info">
+                <Weather 
+                  name={weather.location.name} 
+                  weather={weather} 
+                  selectedDay={weather.forecast.forecastday[selectedDayIndex]}
+                  isToday={selectedDayIndex === 0} 
+                />
+              </div>
+              <div className="col s12 m6 chart-info">
+                <TemperatureChart 
+                  selectedDay={weather.forecast.forecastday[selectedDayIndex]} 
+                  isToday={selectedDayIndex === 0}
+                />
+              </div>
+            </div>
+          </div>
           <Days 
             forecastData={weather} 
             onDaySelect={handleDaySelect}

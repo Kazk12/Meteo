@@ -1,21 +1,261 @@
-.card-action a {
-    font-weight: bold;
-    margin-right: 15px !important;
-    display: inline-block;
-    min-width: 80px;
-    text-transform: capitalize;
-    color: #fff;
-    transition: all 0.3s ease;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-.card-action a.active {
-    color: #61dafb;
-    text-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
-    transform: scale(1.1);
-}
-
+/* Conteneur des jours */
 .card-action {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 15px 10px;
+  background: linear-gradient(to right, rgba(8, 5, 36, 0.9), rgba(27, 11, 70, 0.8), rgba(8, 5, 36, 0.9));
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
+}
+
+/* Effet de lumière d'ambiance */
+.card-action::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(97, 218, 251, 0.1) 0%, transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(255, 51, 153, 0.1) 0%, transparent 30%);
+  filter: blur(10px);
+  z-index: 0;
+  animation: ambientLight 10s infinite alternate ease-in-out;
+}
+
+/* Effet de ligne qui traverse l'interface */
+.card-action::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(97, 218, 251, 0.7), transparent);
+  z-index: 1;
+  animation: scanLine 8s infinite linear;
+}
+
+/* Style des liens de jour */
+.card-action a {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  margin: 8px 10px !important;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  min-height: 45px;
+  text-transform: capitalize;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(18, 9, 68, 0.4);
+  border-radius: 50px;
+  backdrop-filter: blur(4px);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  z-index: 2;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  animation: fadeIn 0.5s both;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+/* Effet de lumière au survol */
+.card-action a::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 50px;
+  height: 150%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(35deg);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: -1;
+}
+
+/* Effet au survol */
+.card-action a:hover {
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(97, 218, 251, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.card-action a:hover::before {
+  left: 150%;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* État actif du jour */
+.card-action a.active {
+  color: white;
+  text-shadow: 0 0 10px rgba(97, 218, 251, 0.7);
+  background: linear-gradient(135deg, rgba(33, 15, 98, 0.8), rgba(97, 218, 251, 0.3));
+  transform: translateY(-7px);
+  border: 1px solid rgba(97, 218, 251, 0.3);
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(97, 218, 251, 0.3),
+    0 0 20px rgba(97, 218, 251, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  animation: pulseActive 2s infinite alternate;
+}
+
+/* Indicateur sous le jour actif */
+.card-action a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 4px;
+  background: #61dafb;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(97, 218, 251, 0.8);
+  animation: glow 1.5s infinite alternate;
+}
+
+/* Effet d'onde au clic */
+.card-action a:active {
+  transform: translateY(-3px) scale(0.98);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.1s;
+}
+
+/* Point de météo dans chaque jour (option) */
+.card-action a .day-indicator {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #61dafb;
+  box-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+.card-action a.rainy .day-indicator { background: #3498db; }
+.card-action a.sunny .day-indicator { background: #f39c12; }
+.card-action a.cloudy .day-indicator { background: #95a5a6; }
+.card-action a.active .day-indicator {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseActive {
+  0% {
+    box-shadow: 
+      0 10px 20px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(97, 218, 251, 0.3),
+      0 0 15px rgba(97, 218, 251, 0.2),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow: 
+      0 10px 20px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(97, 218, 251, 0.3),
+      0 0 25px rgba(97, 218, 251, 0.4),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes glow {
+  0% { opacity: 0.7; box-shadow: 0 0 5px rgba(97, 218, 251, 0.5); }
+  100% { opacity: 1; box-shadow: 0 0 15px rgba(97, 218, 251, 0.9); }
+}
+
+@keyframes scanLine {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+@keyframes ambientLight {
+  0% {
+    background-position: 0% 0%;
+    filter: blur(10px);
+  }
+  50% {
+    filter: blur(12px);
+  }
+  100% {
+    background-position: 100% 100%;
+    filter: blur(10px);
+  }
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+  .card-action {
+    padding: 12px 5px;
+  }
+  
+  .card-action a {
+    min-width: 100px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    margin: 6px 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-action {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    padding: 10px 5px;
+  }
+  
+  .card-action::-webkit-scrollbar {
+    height: 3px;
+  }
+  
+  .card-action::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .card-action::-webkit-scrollbar-thumb {
+    background: rgba(97, 218, 251, 0.3);
+    border-radius: 3px;
+  }
+  
+  .card-action a {
+    min-width: 90px;
+    padding: 8px 14px;
+    font-size: 0.85em;
+  }
+  
+  .card-action a.active::after {
+    bottom: -7px;
+  }
 }

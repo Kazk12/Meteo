@@ -1,24 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Styles de base avec animations */
 .weather.card {
-    margin-top: 4vh;
+  margin-top: 4vh;
+  position: relative;
+  border: none !important;
+  border-radius: 24px !important;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 47, 100, 0.5);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.5s ease;
+  animation: appearFromBottom 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+.weather.card:hover {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 35px rgba(0, 89, 255, 0.6);
+}
+
+/* Background animé avec dégradé en mouvement */
+.weather.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    #0a0528 0%, 
+    #160e4b 25%, 
+    #1b0c3b 50%, 
+    #160e4b 75%, 
+    #0a0528 100%);
+  z-index: -2;
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Effet de particules animées */
+.weather.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(97, 218, 251, 0.1) 0%, transparent 8%),
+    radial-gradient(circle at 70% 60%, rgba(255, 82, 255, 0.1) 0%, transparent 12%),
+    radial-gradient(circle at 40% 80%, rgba(97, 218, 251, 0.1) 0%, transparent 10%),
+    radial-gradient(circle at 80% 10%, rgba(255, 82, 255, 0.1) 0%, transparent 15%),
+    radial-gradient(circle at 10% 90%, rgba(97, 218, 251, 0.1) 0%, transparent 7%);
+  z-index: -1;
+  opacity: 0.6;
+  animation: floatingParticles 20s infinite alternate;
+}
+
+/* Barre de recherche avec effet d'apparition */
+.search-area {
+  background: rgba(11, 8, 41, 0.8) !important;
+  backdrop-filter: blur(5px);
+  border-bottom: 1px solid rgba(97, 218, 251, 0.3) !important;
+  padding: 20px 25px 15px !important;
+  position: relative;
+  z-index: 3;
+  transform-origin: top center;
+  animation: expandDown 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+}
+
+.search-area::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #61dafb, transparent);
+  animation: glowLine 3s infinite alternate;
+}
+
+/* Zone de contenu avec effet de transition */
+.weather-content {
+  background: rgba(11, 8, 41, 0.6) !important;
+  padding: 25px !important;
+  position: relative;
+  animation: fadeContent 0.8s ease-in-out;
+}
+
+.weather-info, .chart-info {
+  padding: 20px !important;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  background: rgba(11, 8, 41, 0.4);
+}
+
+.weather-info:hover, .chart-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Sélecteur de jours animé */
+.card-action {
+  position: relative;
+  background: rgba(18, 9, 68, 0.7) !important;
+  padding: 15px 20px !important;
+  display: flex;
+  justify-content: space-around;
+  overflow-x: auto;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.card-action::-webkit-scrollbar {
+  height: 4px;
+}
+
+.card-action::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.card-action::-webkit-scrollbar-thumb {
+  background: rgba(97, 218, 251, 0.7);
+  border-radius: 2px;
+}
+
+.card-action a {
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  animation: bobUpDown 3s infinite alternate;
+  animation-delay: calc(var(--i, 0) * 0.2s);
+}
+
+.card-action a::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #61dafb;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.card-action a:hover::before {
+  width: 80%;
+}
+
+.card-action a.active {
+  color: #61dafb;
+  text-shadow: 0 0 10px rgba(97, 218, 251, 0.8);
+  transform: scale(1.1);
+}
+
+.card-action a.active::before {
+  width: 90%;
+  height: 3px;
+  box-shadow: 0 0 10px rgba(97, 218, 251, 0.8);
+}
+
+/* État de chargement avec animation avancée */
+.loading {
+  animation: pulse 1.5s infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.loading::before {
+  content: '';
+  width: 80px;
+  height: 80px;
+  border: 4px solid rgba(97, 218, 251, 0.1);
+  border-top: 4px solid #61dafb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+.loading::after {
+  content: 'Chargement des données...';
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  color: #61dafb;
+  animation: pulse 1.5s infinite alternate;
+}
+
+/* Message d'erreur animé */
+.error {
+  color: #ff5252;
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
+  background: rgba(255, 82, 82, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #ff5252;
+  animation: shakeError 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translateZ(0);
+}
+
+/* Ajustements pour les écrans mobiles avec transitions fluides */
+@media (max-width: 600px) {
+  .chart-info {
+    margin-top: 20px;
   }
-  
-  .search-area {
-    background: #0b0829 !important;
-    border-bottom: 1px solid rgba(97, 218, 251, 0.2);
-    padding-bottom: 0 !important;
+
+  .weather.card {
+    margin-left: 10px;
+    margin-right: 10px;
   }
-  
-  /* Pour les animations de chargement quand on change de ville */
-  @keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+
+  .card-action {
+    justify-content: start;
+    padding: 15px !important;
   }
-  
-  .loading {
-    animation: pulse 1.5s infinite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 200px;
-  }
+}
+
+/* Keyframes pour les animations */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes appearFromBottom {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes expandDown {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes fadeContent {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes glowLine {
+  0% { opacity: 0.3; filter: blur(1px); }
+  100% { opacity: 1; filter: blur(2px); }
+}
+
+@keyframes bobUpDown {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatingParticles {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+@keyframes shakeError {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}

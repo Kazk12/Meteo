@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+.chart-container.futuristic {
+  position: relative;
+  height: 420px;
+  background: linear-gradient(135deg, rgba(8, 5, 36, 0.95), rgba(27, 11, 70, 0.9));
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+              0 0 30px rgba(51, 204, 255, 0.2);
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  animation: fadeIn 0.8s ease-out, glowPulse 6s infinite alternate;
+}
+
+/* Bordure néon animée */
+.neon-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  pointer-events: none;
+  animation: neonGlow 3s infinite alternate;
+}
+
+.chart-content-wrapper {
+  height: 100%;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  position: relative;
+}
+
+/* En-tête futuriste */
+.chart-header-futuristic {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.temp-heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+}
+
+.temp-stat {
+  display: flex;
+  align-items: baseline;
+}
+
+.current-temp {
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(to right, #ff3399, #33ccff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 15px rgba(255, 51, 153, 0.4);
+}
+
+.temp-unit {
+  font-size: 20px;
+  margin-left: 5px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.stats-container {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+  padding: 12px 20px;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.stat-value.min {
+  color: #33ccff;
+}
+
+.stat-value.max {
+  color: #ff3399;
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 20px;
+}
+
+/* Zone du graphique */
+.chart-visualization {
+  flex-grow: 1;
+  position: relative;
+}
+
+/* Pied du graphique */
+.chart-footer-futuristic {
+  margin-top: 15px;
+}
+
+.time-markers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+/* Écran de chargement */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.pulse-loader {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(51, 204, 255, 0.8) 0%, rgba(255, 51, 153, 0.8) 100%);
+  box-shadow: 0 0 30px rgba(255, 51, 153, 0.7);
+  margin-bottom: 20px;
+  animation: pulseLoader 1.5s infinite ease-in-out;
+}
+
+.loading-container p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes neonGlow {
+  0% { 
+    box-shadow: 0 0 10px rgba(51, 204, 255, 0.5),
+                inset 0 0 10px rgba(51, 204, 255, 0.2);
+    border-image: linear-gradient(45deg, rgba(51, 204, 255, 0.7), rgba(255, 51, 153, 0.7)) 1;
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 51, 153, 0.5),
+                inset 0 0 20px rgba(255, 51, 153, 0.2);
+    border-image: linear-gradient(45deg, rgba(255, 51, 153, 0.7), rgba(51, 204, 255, 0.7)) 1;
+  }
+  100% { 
+    box-shadow: 0 0 10px rgba(51, 204, 255, 0.5),
+                inset 0 0 10px rgba(51, 204, 255, 0.2);
+    border-image: linear-gradient(45deg, rgba(51, 204, 255, 0.7), rgba(255, 51, 153, 0.7)) 1;
+  }
+}
+
+@keyframes pulseLoader {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                0 0 30px rgba(51, 204, 255, 0.2);
+  }
+  100% {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                0 0 50px rgba(255, 51, 153, 0.4);
+  }
+}
+
+/* Points du graphique avec animation de pulsation */
+.chart-container canvas .point {
+  transition: all 0.3s ease;
+}
+
+.chart-container canvas .point.pulse {
+  animation: pointPulse 2s infinite;
+}
+
+@keyframes pointPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 51, 153, 0); }
+  50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255, 51, 153, 0.7); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 51, 153, 0); }
+}
+
+/* Animation de survol pour le conteneur principal */
+.chart-container.futuristic:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 
+              0 0 40px rgba(51, 204, 255, 0.3);
+  transition: all 0.5s ease;
+}
+
+/* Média queries pour la responsivité */
+@media screen and (max-width: 768px) {
+  .chart-header-futuristic {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .stats-container {
+    margin-top: 15px;
+    align-self: stretch;
+  }
+  
+  .current-temp {
+    font-size: 36px;
+  }
+}

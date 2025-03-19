@@ -1,15 +1,22 @@
-import React from 'react'
-import './Days.css'
+// Dans votre composant Days.jsx
+
+import React from 'react';
+import './Days.css';
 
 function Days({ forecastData, onDaySelect, selectedDayIndex }) {
-  // Si aucune donnée n'est disponible, afficher un message
-  if (!forecastData || !forecastData.forecast || !forecastData.forecast.forecastday) {
-    return <div className="card-action">Chargement des prévisions...</div>;
-  }
+  // Fonction pour déterminer la classe de condition météo
+  const getWeatherCondition = (day) => {
+    if (!day || !day.day || !day.day.condition) return '';
+    
+    const condition = day.day.condition.text.toLowerCase();
+    if (condition.includes('rain') || condition.includes('pluie')) return 'rainy';
+    if (condition.includes('sun') || condition.includes('soleil') || condition.includes('clear')) return 'sunny';
+    return 'cloudy';
+  };
 
-  // Fonction pour formater la date en jour de la semaine
+  // Fonction pour formater la date
   const formatDate = (dateString) => {
-    const options = { weekday: 'long' };
+    const options = { weekday: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('fr-FR', options);
   };
 
@@ -23,13 +30,15 @@ function Days({ forecastData, onDaySelect, selectedDayIndex }) {
             e.preventDefault();
             onDaySelect(index);
           }}
-          className={selectedDayIndex === index ? 'active' : ''}
+          className={`${selectedDayIndex === index ? 'active' : ''} ${getWeatherCondition(day)}`}
+          style={{"--i": index}}
         >
           {index === 0 ? "Aujourd'hui" : formatDate(day.date)}
+          <span className="day-indicator"></span>
         </a>
       ))}
     </div>
   );
 }
 
-export default Days
+export default Days;
