@@ -15,7 +15,7 @@ function WeatherCard() {
   const [transitionLoading, setTransitionLoading] = useState(false);
 
   useEffect(() => {
-    // Réinitialiser les états lors du changement de ville
+    // Réinitialiser les états lors du changement de villes
     setLoading(true);
     setError(null);
     setSelectedDayIndex(0);
