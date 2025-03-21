@@ -1,3 +1,309 @@
+/* Importation des polices */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+/* Reset CSS pour une meilleure cohérence */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styles globaux */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Arrière-plan cosmique optimisé - Utilise CSS pur avec moins d'animations complexes */
 body {
-  background: #202629;
+  position: relative;
+  background: linear-gradient(125deg, 
+    #050328 0%, 
+    #0a0528 20%, 
+    #150d36 40%, 
+    #1c1142 60%, 
+    #1c1142 65%,
+    #150d36 70%,
+    #0a0528 85%, 
+    #050328 100%);
+  background-size: 300% 300%;
+  animation: gradientBackground 30s cubic-bezier(0.36, 0.11, 0.3, 0.8) infinite alternate;
+}
+
+/* Effet de bruit statique léger - Bonne performance car pas de transformation */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Étoiles scintillantes optimisées - Utilise des images CSS fixes */
+.star-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(1.5px 1.5px at 10% 10%, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 20% 35%, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
+    radial-gradient(2px 2px at 35% 15%, rgba(255, 255, 255, 1) 50%, transparent 100%),
+    radial-gradient(2px 2px at 45% 40%, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 70%, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 70% 25%, rgba(255, 255, 255, 1) 50%, transparent 100%),
+    radial-gradient(2px 2px at 85% 50%, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 95% 80%, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 25% 90%, rgba(255, 255, 255, 1) 50%, transparent 100%),
+    radial-gradient(2px 2px at 65% 85%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+  animation: starsOpacity 8s ease-in-out infinite alternate;
+}
+
+/* Nebuleuse simplifiée - Ne fait pas bouger la nébuleuse entière, seulement son opacité */
+.nebula-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 35%, rgba(97, 218, 251, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 75%, rgba(155, 89, 182, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 45% 15%, rgba(130, 255, 236, 0.06) 0%, transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+  animation: nebulaOpacity 12s ease-in-out infinite alternate;
+}
+
+/* Étoiles brillantes spéciales - Un nombre limité pour les performances */
+.bright-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bright-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+  opacity: 0.8;
+  animation: starPulse 4s ease-in-out infinite alternate;
+}
+
+/* Conteneur pour les étoiles filantes - Limité à quelques animations en même temps */
+.shooting-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Trait lumineux cosmique - Animation de rotation simple */
+.cosmic-ray {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0,
+    transparent 85%,
+    rgba(97, 218, 251, 0.08) 90%,
+    rgba(97, 218, 251, 0.02) 95%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  opacity: 0.6;
+  z-index: -2;
+  animation: rayRotate 60s linear infinite;
+}
+
+/* ANIMATIONS OPTIMISÉES */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes starsOpacity {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes nebulaOpacity {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes starPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+  }
+}
+
+@keyframes rayRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Animation pour les étoiles filantes - Optimisée */
+@keyframes shootingStar {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-1000px) translateY(300px);
+    opacity: 0;
+  }
+}
+
+/* Styles de base pour tous les conteneurs */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  position: relative;
+  /* Effet subtil d'apparition */
+  animation: containerFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes containerFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Personnalisation de la barre de défilement avec animation */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(11, 8, 41, 0.6);
+  border-radius: 4px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, 
+    rgba(97, 218, 251, 0.7), 
+    rgba(155, 89, 182, 0.7), 
+    rgba(97, 218, 251, 0.7));
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(97, 218, 251, 0.3);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, 
+    rgba(97, 218, 251, 0.9), 
+    rgba(155, 89, 182, 0.9), 
+    rgba(97, 218, 251, 0.9));
+  box-shadow: 0 0 8px rgba(97, 218, 251, 0.5);
+}
+
+/* Styles de texte globaux avec animations */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+  /* Animation subtile au chargement de la page */
+  animation: textReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-fill-mode: both;
+}
+
+p, span, div, button, input {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Animation pour les titres */
+@keyframes textReveal {
+  0% { 
+    opacity: 0; 
+    transform: translateY(10px); 
+    letter-spacing: 0.5px;
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+    letter-spacing: normal;
+  }
+}
+
+/* Améliorations pour les sélections de texte avec transition */
+::selection {
+  background: rgba(97, 218, 251, 0.3);
+  color: white;
+  text-shadow: 0 0 8px rgba(97, 218, 251, 0.8);
+  transition: all 0.3s ease;
 }

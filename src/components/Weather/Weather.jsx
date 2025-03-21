@@ -1,4 +1,4 @@
-import React from 'react'
+
 import './Weather.css'
 
 function Weather({ name, weather, selectedDay, isToday }) {
@@ -7,6 +7,7 @@ function Weather({ name, weather, selectedDay, isToday }) {
     const options = { weekday: 'long', day: 'numeric', month: 'long' };
     return new Date(dateString).toLocaleDateString('fr-FR', options);
   };
+  
 
   // Déterminer les données à afficher (jour actuel ou prévision)
   const currentData = isToday 

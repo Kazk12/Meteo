@@ -1,6 +1,6 @@
 // Dans votre composant Days.jsx
 
-import React from 'react';
+
 import './Days.css';
 
 function Days({ forecastData, onDaySelect, selectedDayIndex }) {

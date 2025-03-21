@@ -1,12 +1,16 @@
-# React + Vite
+# Weather App (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ceci est un projet d'entrainement en React qui consiste a faire une app méteo et qui répond aux consigne de ce TP : [Lien vers le TP](https://github.com/G404-DWWM/React-Weather-App)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Consignes pour récupérer le projet 
 
-## Expanding the ESLint configuration
+1. `git clone https://github.com/Kazk12/Meteo.git` 
+2. `cd Meteo`
+3. `npm install`
+4. `npm run dev` 
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Configuration du projet
+
+1. Dupliquer le `.env.exemple` et renommez-le en `.env`
+2. Renseignez votre API Key pour la Météo. Vous pouvez la retrouver ici : [ICI](https://www.weatherapi.com/)
